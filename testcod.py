@@ -35,15 +35,15 @@ motorC = LargeMotor(OUTPUT_C) # Magnet
 
 # Describe this function...
 def forward():
-    while not ultrasonic_sensor_in2.distance_centimeters <= 25:
-        tank_drive.on(20, 20)
+    while ultrasonic_sensor_in2.distance_centimeters > 25:
+        tank_drive.on(40, 40)
     tank_drive.off(brake=True)
 
 # Describe this function...
 def turn_right():
     gyro_sensor_in5.reset()
     while gyro_sensor_in5.angle <= 90:
-        tank_drive.on(100, 0)
+        tank_drive.on(80, 0)
     tank_drive.off(brake=True)
     while gyro_sensor_in5.angle != 90:
         tank_drive.on(0, 2)
@@ -53,11 +53,16 @@ def turn_right():
 def turn_left():
     gyro_sensor_in5.reset()
     while gyro_sensor_in5.angle >= -90:
-        tank_drive.on(0, 100)
+        tank_drive.on(0, 80)
     tank_drive.off(brake=True)
     while gyro_sensor_in5.angle != -90:
         tank_drive.on(2, 0)
     tank_drive.off(brake=True)
 
 
-turn_left()
+while not color_sensor_in1.rgb[0]:
+    forward()
+    if ultrasonic_sensor_in3.distance_centimeters > ultrasonic_sensor_in4.distance_centimeters:
+        turn_left()
+    else:
+        turn_right()
