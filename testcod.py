@@ -42,25 +42,32 @@ def forward():
 # Describe this function...
 def turn_right():
     gyro_sensor_in5.reset()
-    while gyro_sensor_in5.angle <= 90:
-        tank_drive.on(80, 0)
-    tank_drive.off(brake=True)
-    while gyro_sensor_in5.angle != 90:
-        tank_drive.on(0, 2)
+    while gyro_sensor_in5.angle < 90:
+        tank_drive.on(100, -100)
+    while not gyro_sensor_in5.angle == 90:
+        if gyro_sensor_in5.angle > 90:
+                tank_drive.on(0, 80)
+        if gyro_sensor_in5.angle < 90:
+                tank_drive.on(15, 0)
     tank_drive.off(brake=True)
 
 # Describe this function...
 def turn_left():
     gyro_sensor_in5.reset()
-    while gyro_sensor_in5.angle >= -90:
-        tank_drive.on(0, 80)
-    tank_drive.off(brake=True)
-    while gyro_sensor_in5.angle != -90:
-        tank_drive.on(2, 0)
+    while gyro_sensor_in5.angle > -90:
+        tank_drive.on(-100, 100)
+    while not gyro_sensor_in5.angle == -90:
+        if gyro_sensor_in5.angle < -90:
+                tank_drive.on(80, 0)
+        if gyro_sensor_in5.angle > -90:
+                tank_drive.on(0, 15)
     tank_drive.off(brake=True)
 
 
-while not color_sensor_in1.rgb[0]:
+
+
+
+while not color_sensor_in1.color == 4:
     forward()
     if ultrasonic_sensor_in3.distance_centimeters > ultrasonic_sensor_in4.distance_centimeters:
         turn_left()
