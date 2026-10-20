@@ -1,0 +1,14 @@
+angle = None
+force = None
+
+# Describe this function...
+def my_1shot(angle, force):
+    motorD.on_for_degrees(5, angle)
+    motorE.on_for_degrees((-100), force)
+    motorE.on_for_rotations(100, 1)
+
+
+if laser_sensor_in3.distance_centimeters > 360:
+    my_1shot((laser_sensor_in3.distance_centimeters / 1000) * 85, 1000)
+else:
+    my_1shot((laser_sensor_in3.distance_centimeters / 1000) * 78, 1000)
