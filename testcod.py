@@ -44,8 +44,8 @@ def Turn(degrees):
     sp = degrees + pv
     for count in range (300):
         pv = gyro_sensor_in5.angle
-        error = min(max(error, -100), 100)
         error = sp - pv
+        error = min(max(error, -100), 100)
         tank_drive.on(error, (-1 * error))
     tank_drive.off(brake = True)
     
