@@ -47,6 +47,8 @@ def my_1shot(angle, force):
 
 if laser_sensor_in3.distance_centimeters > 360:
     my_1shot((laser_sensor_in3.distance_centimeters / 1000) * 85, 1000)
+elif laser_sensor_in3.distance_centimeters > 220 and laser_sensor_in3.distance_centimeters > 250:
+    my_1shot((laser_sensor_in3.distance_centimeters / 1000) * 73, 1000)
 elif laser_sensor_in3.distance_centimeters > 130 and laser_sensor_in3.distance_centimeters < 150:
     my_1shot((laser_sensor_in3.distance_centimeters / 1000) * 73, 1000)
 else:
